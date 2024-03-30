@@ -1,0 +1,64 @@
+---
+import Header from '../components/Header.astro';
+
+interface Props {
+	title: string;
+	description?: string;
+	image?: string;
+}
+
+const { title, description="Website development and design", image="images/design-high-white.png" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<meta property="og:image" content={image}>
+		<title>{title}</title>
+	</head>
+	<body class="min-h-screen bg-sky-950">
+		<Header />
+		<slot />
+	</body>
+</html>
+<style is:global>
+	:root {
+		/* purples */
+		/* --accent: 136, 58, 234; */
+		/* --accent-light: 224, 204, 250; */
+		--accent: 14, 196, 109;
+		--accent-light: 240, 253, 244;
+		--accent-dark: 74, 222, 128;
+		--accent-gradient: linear-gradient(
+			45deg,
+			rgb(var(--accent)),
+			rgb(var(--accent-light)) 30%,
+			white 60%
+		);
+	}
+	/* html {
+		font-family: system-ui, sans-serif;
+		background: #13151a;
+		background-size: 224px;
+	}
+	code {
+		font-family:
+			Menlo,
+			Monaco,
+			Lucida Console,
+			Liberation Mono,
+			DejaVu Sans Mono,
+			Bitstream Vera Sans Mono,
+			Courier New,
+			monospace;
+	} */
+	title {
+		font-family: 
+
+	}
+</style>
