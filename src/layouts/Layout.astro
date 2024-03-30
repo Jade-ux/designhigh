@@ -1,5 +1,6 @@
 ---
 import Header from '../components/Header.astro';
+import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
 	title: string;
@@ -20,6 +21,7 @@ const { title, description="Website development and design", image="images/desig
 		<meta name="generator" content={Astro.generator} />
 		<meta property="og:image" content={image}>
 		<title>{title}</title>
+		<ViewTransitions />
 	</head>
 	<body class="min-h-screen bg-sky-950">
 		<Header />
@@ -40,6 +42,39 @@ const { title, description="Website development and design", image="images/desig
 			rgb(var(--accent-light)) 30%,
 			white 60%
 		);
+	}
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	section {
+		margin: auto;
+		padding: 1rem;
+		width: 300px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	h1 {
+		font-size: 4rem;
+		font-weight: 400;
+		line-height: 1;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+
 	}
 	/* html {
 		font-family: system-ui, sans-serif;
