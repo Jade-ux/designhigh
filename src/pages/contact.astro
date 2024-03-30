@@ -1,0 +1,32 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Contact">
+    <section>
+    <h1><span class="text-gradient">Contact me</span></h1>
+        <div class="mb-20" >
+            <p class="text-white">will be a form here</p>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    	section {
+		margin: auto;
+		padding: 1rem;
+		width: 300px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+    	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+		
+	}
+</style>
