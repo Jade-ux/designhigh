@@ -10,29 +10,33 @@ import Logo from '../components/Logo.astro';
 
 		<h1><span class="text-gradient">DESIGN HIGH</span></h1>
 		<div class="main-body">
-		<ul role="list" class="link-card-grid">
-			<p>text</p>
+		<ul role="list" class="grid md:grid-cols-2 grid-cols-1 gap-10">
+
+			<li class="order-1 md:order-1">
 			<Card
-				href="https://docs.astro.build/"
+				href="/contact"
 				title="Design"
 				body="your brand beautifully presented... "
 			/>
-	
-	
+		</li>
+		<li class="order-2 md:order-2">text - design</li>
+		<li class="order-4 md:order-3">text - build</li>
+		<li class="order-3 md:order-4">
 			<Card
-				href="https://astro.build/integrations/"
+				href="/contact"
 				title="Build"
 				body="responsive websites built for performance, reliability and enhanced user experience"
 			/>
-			<p>text</p>
-			<p>text</p>
+		</li>
+
+			<li class="order-6 md:order-6">text - optimise</li>
+			<li class="order-5 md:order-5">
 			<Card
-				href="https://astro.build/themes/"
+				href="/contact"
 				title="Optimise"
 				body="make sure your website is seen with search engine optimisation and marketing"
 			/>
-
-	
+</li>
 		</ul>
 	</div>
 	</main>
