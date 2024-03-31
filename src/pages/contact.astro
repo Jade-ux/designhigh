@@ -7,7 +7,7 @@ import Layout from "../layouts/Layout.astro";
     <main>
 <Logo />
     <h1><span class="uppercase text-gradient">contact</span></h1>
-    <div class="form-section flex justify-center">
+    <div class="form-section">
     <form     class="grid gap-y-6 items-end max-md:grid-cols-1 my-6 "     no-error-message>
         <label class="text-center" for="message">Tell me about your project</label>
         <textarea
@@ -30,7 +30,8 @@ import Layout from "../layouts/Layout.astro";
 
 <style>
     .form-section {
-        width: 500px;
+        width: 300px;
+        max-width: calc(100% - 2rem);
         margin: auto;
     }
 
