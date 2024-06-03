@@ -36,31 +36,47 @@ import Layout from "../layouts/Layout.astro";
         max-width: calc(100% - 2rem);
         margin: auto;
     }
-
 </style>
 
 <script>
-    document.getElementById("contact-form").addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const message = document.getElementById("message").value;
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("contact-form");
+        if (form) {
+            form.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const messageElement = document.getElementById("message") as HTMLTextAreaElement;
+                if (!messageElement) {
+                    console.error("Message textarea not found");
+                    return;
+                }
+                const message = messageElement.value;
 
-        try {
-            const response = await fetch("../api/send-email", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ message }),
+                try {
+                    const response = await fetch("/api/send-email", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ message }),
+                    });
+
+                    if (response.ok) {
+                        form.style.display = "none";
+                        const thankYouMessage = document.getElementById("thank-you-message");
+                        if (thankYouMessage) {
+                            thankYouMessage.style.display = "block";
+                        } else {
+                            console.error("Thank you message element not found");
+                        }
+                    } else {
+                        console.error("Failed to send message");
+                    }
+                } catch (error) {
+                    console.error("Error:", error);
+                }
             });
-
-            if (response.ok) {
-                document.getElementById("contact-form").style.display = "none";
-                document.getElementById("thank-you-message").style.display = "block";
-            } else {
-                console.error("Failed to send message");
-            }
-        } catch (error) {
-            console.error("Error:", error);
+        } else {
+            console.error("Contact form not found");
         }
     });
 </script>
