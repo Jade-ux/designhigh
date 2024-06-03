@@ -5,27 +5,29 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout title="Contact">
     <main>
-<Logo />
-    <h1><span class="uppercase text-gradient">contact</span></h1>
-    <div class="form-section">
-    <form     class="grid gap-y-6 items-end max-md:grid-cols-1 my-6 "     no-error-message>
-        <label class="text-center" for="message">Tell me about your project</label>
-        <textarea
-        rows="3"
-        name="message"
-        id="message"
-        class="border border-teal-900 rounded-sm text-xl px-6 py-6 text-black"
-    />
-
-    <button
-        type="submit"
-        class="text-xl text-sky-900 bg-emerald-100 px-6 py-3 rounded-sm my-1 font-semibold"
-    >
-        Send</button
-    >
-    </form>
-</div>
-</main>
+        <Logo />
+        <h1><span class="uppercase text-gradient">contact</span></h1>
+        <div class="form-section">
+            <form id="contact-form" class="grid gap-y-6 items-end max-md:grid-cols-1 my-6" no-error-message>
+                <label class="text-center" for="message">Tell me about your project</label>
+                <textarea
+                    rows="3"
+                    name="message"
+                    id="message"
+                    class="border border-teal-900 rounded-sm text-xl px-6 py-6 text-black"
+                ></textarea>
+                <button
+                    type="submit"
+                    class="text-xl text-sky-900 bg-emerald-100 px-6 py-3 rounded-sm my-1 font-semibold"
+                >
+                    Send
+                </button>
+            </form>
+            <div id="thank-you-message" style="display: none;">
+                <p>Thank you for your message!</p>
+            </div>
+        </div>
+    </main>
 </Layout>
 
 <style>
@@ -36,3 +38,29 @@ import Layout from "../layouts/Layout.astro";
     }
 
 </style>
+
+<script>
+    document.getElementById("contact-form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const message = document.getElementById("message").value;
+
+        try {
+            const response = await fetch("../api/send-email", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ message }),
+            });
+
+            if (response.ok) {
+                document.getElementById("contact-form").style.display = "none";
+                document.getElementById("thank-you-message").style.display = "block";
+            } else {
+                console.error("Failed to send message");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    });
+</script>
