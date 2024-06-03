@@ -1,41 +1,41 @@
-const nodemailer = require("nodemailer");
-require("dotenv").config();
+import { createTransport } from "nodemailer";
+// const nodemailer = require("nodemailer");
+import dotenv from "dotenv";
+dotenv.config();
 
-exports.handler = async (event, context) => {
-  if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      body: "Method Not Allowed",
-    };
+export async function POST(event) {
+  if (event.request.method !== "POST") {
+    return new Response("Method Not Allowed", { status: 405 });
   }
-
-  const { message } = JSON.parse(event.body);
-
-  const transporter = nodemailer.createTransport({
-    service: "Gmail",
-    auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_PASS,
-    },
-  });
-
-  const mailOptions = {
-    from: process.env.GMAIL_USER,
-    to: process.env.GMAIL_USER,
-    subject: "New Message from Contact Form",
-    text: message,
-  };
 
   try {
+    const { message } = await event.request.json();
+
+    const transporter = createTransport({
+      service: "Gmail",
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.GMAIL_USER,
+      to: process.env.GMAIL_USER,
+      subject: "New Message from Contact Form",
+      text: message,
+    };
+
     await transporter.sendMail(mailOptions);
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ success: true }),
-    };
+    return new Response(JSON.stringify({ success: true }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: error.message }),
-    };
+    console.log("errr");
+    return new Response(JSON.stringify({ error: error.message }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
-};
+}
