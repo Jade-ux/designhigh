@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export async function POST(event) {
+  console.log("did the thing");
   if (event.request.method !== "POST") {
     return new Response("Method Not Allowed", { status: 405 });
   }
@@ -14,8 +15,8 @@ export async function POST(event) {
     const transporter = createTransport({
       service: "Gmail",
       auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PASS,
+        user: "designhighstories@gmail.com",
+        pass: "Hk4yA&n@0d$e",
       },
     });
 
@@ -32,7 +33,6 @@ export async function POST(event) {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.log("errr");
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
       headers: { "Content-Type": "application/json" },

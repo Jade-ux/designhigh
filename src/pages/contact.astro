@@ -9,12 +9,26 @@ import Layout from "../layouts/Layout.astro";
         <h1><span class="uppercase text-gradient">contact</span></h1>
         <div class="form-section">
             <form id="contact-form" class="grid gap-y-6 items-end max-md:grid-cols-1 my-6" no-error-message>
+                <label class="text-center" for="name">Your name</label>
+                <textarea
+                    rows="1"
+                    name="name"
+                    id="name"
+                    class="border border-teal-900 rounded-sm text-sm px-6 py-2 text-black"
+                ></textarea>
+                <label class="text-center" for="email">Your email address</label>
+                <textarea
+                    rows="1"
+                    name="email"
+                    id="email"
+                    class="border border-teal-900 rounded-sm text-sm px-6 py-2 text-black"
+                ></textarea>
                 <label class="text-center" for="message">Tell me about your project</label>
                 <textarea
                     rows="3"
                     name="message"
                     id="message"
-                    class="border border-teal-900 rounded-sm text-xl px-6 py-6 text-black"
+                    class="border border-teal-900 rounded-sm text-sm px-6 py-2 text-black"
                 ></textarea>
                 <button
                     type="submit"
@@ -52,6 +66,7 @@ import Layout from "../layouts/Layout.astro";
                 const message = messageElement.value;
 
                 try {
+                    console.log("sending..")
                     const response = await fetch("/api/send-email", {
                         method: "POST",
                         headers: {
